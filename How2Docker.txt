@@ -1,0 +1,41 @@
+#Docker
+
+apt install docker docker.io docker-compose -y
+
+#docker add group
+
+sudo usermod -aG docker $USER
+
+#DockerCompose untuk cara lain dari Docker run -p bla bla bla tapi lewat File yaitu .yaml/.yml
+
+#buat compose file untuk registry --> docker-compose.yml
+
+docker compose -f docker-compose.yml
+
+docker run -d -p 5000:5000 registry
+
+#Tag docker images
+
+docker tag nginx:latest 127.0.0.1:5000/webserver:base
+docker tag python:3.8-slim 127.0.0.1:5000/python:3.8-slim
+
+#Dockerfile untuk build Image Docker sesuai yg kita mau,seperti Workdir bisa diatur atau command
+
+#Buat Dockerfile untuk SampleWebapp
+
+DockerFilenya :
+FROM python:3.8-slim
+RUN python -m pip install --upgrade pip
+RUN apt update && pip install flask
+WORKDIR /opt/sample-web
+COPY index.html /opt/sample-web/
+COPY main.py /opt/sample-web/
+CMD ["python", "main.py"]
+
+#Setelah itu di Build dengan nama sampleweb:latest
+
+docker build . -t sampleweb:latest
+
+#run sampleweb
+
+docker run -d --name sampleweb -p 80:8080 sampleweb:latest

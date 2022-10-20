@@ -1,0 +1,23 @@
+#Python WebApp
+
+sudo apt install python3.8-venv
+
+sudo python3 -m venv /opt/env/myenv
+
+. bin/activate
+
+sudo mkdir /opt/sample-web
+
+cd /opt/sample-web
+
+touch main.py
+
+touch index.html
+
+Ganti chown dan chmod
+
+export FLASK_APP=main.py
+export FLASK_RUN_PORT=8080
+export FLASK_RUN_HOST=0.0.0.0
+
+flask run // python3 main.py --> pip3 install flask
