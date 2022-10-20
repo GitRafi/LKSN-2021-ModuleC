@@ -10,7 +10,7 @@ sudo usermod -aG docker $USER
 
 #buat compose file untuk registry --> docker-compose.yml
 
-docker-compose -f docker-compose.yml
+docker-compose -f docker-compose.yml up
 
 docker run -d -p 5000:5000 registry
 
